@@ -1,0 +1,45 @@
+Table book {
+  Note "Book details table"
+
+  isbn                text [pk, increment]
+  title               text
+  author              text
+  genre               text
+  publication_year    integer
+}
+
+Table member {
+  Note "Member details table"
+
+  member_id  text [pk, increment]
+  first_name text
+  last_name  text
+  address    text
+  email      text [unique]
+}
+
+Table loan {
+  Note "Loan details table"
+
+  loan_id         integer [pk, increment]
+  isbn            text[ref: > book.isbn]
+  member_id       text [ref: > member.member_id]
+  loan_date       date
+  expected_return date
+  branch_id       integer [ref: > branch.branch_id]
+}
+
+Table branch {
+  Note "Branch details table"
+
+  branch_id  integer [pk]
+  branch_name text
+  location   text
+}
+
+Table branch_book {
+  Note "Branch Books details table"
+
+  branch_id  integer [ref: > branch.branch_id]
+  isbn       text [ref: > book.isbn]
+}
